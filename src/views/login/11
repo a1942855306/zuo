@@ -1,0 +1,98 @@
+<template>
+  <div class="login-container">
+    <!--
+      el-form 表单组件
+      每个表单项都必须使用 el-form-item 组件包裹
+     -->
+    <div class="login-form-wrap">
+      <div class="login-haed">
+        <div class="log"></div>
+      </div>
+      <el-form   class="login-form" ref="form" :model="user">
+  <el-form-item>
+    <el-input v-model="user.mobile" placeholder="请输入手机号"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-input v-model="user.code" placeholder="请输入验证码"></el-input>
+  </el-form-item>
+  <el-form-item>
+          <el-checkbox v-model="checked">我已阅读并同意用户协议和隐私条款</el-checkbox>
+        </el-form-item>
+  <el-form-item>
+    <el-button  type="primary" class="login-button" @click="onLogin"  >登录</el-button>
+  </el-form-item>
+  </el-form>
+       </div>
+  </div>
+</template>
+
+<script>
+import request from '@/utils/request'
+export default {
+  data () {
+    return {
+      name: 'LoginIndex',
+      user: {
+        mobile: '',
+        code: ''
+      },
+      checked: false
+    }
+  },
+  methods: {
+    onLogin () {
+      console.log(111)
+      const user = this.user
+      request({
+        methods: 'POST',
+        url: '/mp/v1_0/authorizations',
+        data: user
+      }).then(res => {
+        console.log(res)
+        // this.$message({
+        //   message: '登录成功',
+        //   type: 'success'
+        // })
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }
+}
+</script>
+
+<style scoped lang="less">
+ .login-container{
+   position: fixed;
+   left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('./login_bg.jpg');
+  background-size: cover;
+   .login-form-wrap{
+     min-width: 300px;
+     padding: 30px 50px 10px;
+    background-color: #fff;
+    .login-haed{
+      display: flex;
+      justify-content: center;
+      .log{
+        width: 200px;
+        height: 57px;
+        background: url('./logo_index.png') no-repeat;
+        background-size: contain;
+      }
+    }
+   }
+ }
+ .login-from{
+   .login-button{
+     width: 100%;
+    }
+ }
+</style>
