@@ -9,6 +9,7 @@ export const login = data => {
     data
   })
 }
+
 export const getUserProfile = () => {
   return request({
     method: 'GET',
