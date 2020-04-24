@@ -15,5 +15,4 @@ request.interceptors.request.use(
     console.log(error)
   }
 )
-
 export default request

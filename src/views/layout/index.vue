@@ -18,7 +18,7 @@
         </div>
         <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>设置</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="olginout">退出</el-dropdown-item>
         </el-dropdown-menu>
     </el-dropdown>
 </div>
@@ -52,6 +52,25 @@ export default {
       getUserProfile().then(res => {
         this.user = res.data.data
       })
+    },
+    olginout () {
+      this.$confirm('是否退出登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        window.localStorage.removeItem('user')
+        this.$router.push('/login')
+        this.$message({
+          type: 'success',
+          message: '退出成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
     }
   }
 }
@@ -75,10 +94,6 @@ export default {
         .aside-menu{
             height: 100%;
             // background: pink;
-        }
-        .main{
-            // height: 100%;
-            background: yellow;
         }
     }
     .header-container{

@@ -10,6 +10,7 @@ import VueRouter from 'vue-router'
 import Login from '@/views/login/'
 import home from '@/views/home/'
 import layout from '@/views/layout'
+import active from '@/views/active/'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
         path: '',
         name: 'home',
         component: home
+      },
+      {
+        path: '/active',
+        name: 'active',
+        component: active
       }
     ]
   }
@@ -37,5 +43,16 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-
+const user = JSON.parse(window.localStorage.getItem('user'))
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login') {
+    if (user) {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
 export default router
