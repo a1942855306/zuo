@@ -11,6 +11,7 @@ import Login from '@/views/login/'
 import home from '@/views/home/'
 import layout from '@/views/layout'
 import active from '@/views/active/'
+import publish from '@/views/publish/'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
         path: '/active',
         name: 'active',
         component: active
+      },
+      {
+        path: '/publish',
+        name: 'publish',
+        component: publish
       }
     ]
   }
