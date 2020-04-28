@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 
+// 获取文章
 export const getActive = params => {
   return request({
     method: 'GET',
@@ -8,6 +9,7 @@ export const getActive = params => {
   })
 }
 
+// 获取文章频道
 export const getActivechannels = () => {
   return request({
     method: 'GET',
@@ -15,6 +17,7 @@ export const getActivechannels = () => {
   })
 }
 
+// 删除文章
 export const deletActivechannels = (id) => {
   return request({
     method: 'DELETE',
@@ -22,6 +25,7 @@ export const deletActivechannels = (id) => {
   })
 }
 
+// 发表文章
 export const fabiaoactive = (data, draft = false) => {
   return request({
     method: 'POST',
@@ -33,6 +37,7 @@ export const fabiaoactive = (data, draft = false) => {
   })
 }
 
+// 修改文章
 export const xiugai = (id, data, draft = false) => {
   return request({
     method: 'PUT',
@@ -47,12 +52,28 @@ export const xiugai = (id, data, draft = false) => {
   })
 }
 
+// 获取单个文章
 export const huoqu = (id) => {
   return request({
     method: 'GET',
     url: `/mp/v1_0/articles/${id}`,
     Headers: {
       'Content-Type': 'application/json'
+    }
+  })
+}
+
+// 修改评论状态
+export const xgplzt = (articleId, allowComment) => {
+  return request({
+    method: 'PUT',
+    url: '/mp/v1_0/comments/status',
+    params: {
+      // 对象的属性名不受代码规范限制
+      article_id: articleId
+    },
+    data: {
+      allow_comment: allowComment
     }
   })
 }

@@ -12,6 +12,9 @@ import home from '@/views/home/'
 import layout from '@/views/layout'
 import active from '@/views/active/'
 import publish from '@/views/publish/'
+import image from '@/views/image'
+import comment from '@/views/comment'
+import setting from '@/views/settings'
 
 Vue.use(VueRouter)
 
@@ -41,6 +44,21 @@ const routes = [
         path: '/publish',
         name: 'publish',
         component: publish
+      },
+      {
+        path: '/image',
+        name: 'image',
+        component: image
+      },
+      {
+        path: '/commit',
+        name: 'comment',
+        component: comment
+      },
+      {
+        path: '/setting',
+        name: 'setting',
+        component: setting
       }
     ]
   }
