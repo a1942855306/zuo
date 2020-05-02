@@ -7,7 +7,12 @@
                 <el-breadcrumb-item >{{ $route.query.id ? '修改文章' : '发表文章'}}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <el-form :rules="rules" :model="active"  ref="publish-form" label-width="100px" class="demo-ruleForm">
+        <el-form
+        :model="active"
+        :rules="formRules"
+        label-width="60px"
+        ref="publish-form"
+        >
             <el-form-item label="标题" prop="title">
                 <el-input v-model="active.title"></el-input>
             </el-form-item>
@@ -21,6 +26,11 @@
                 <el-radio :label="0">无图</el-radio>
                 <el-radio :label="-1">自动</el-radio>
                 </el-radio-group>
+                <template v-if="active.cover.type>0">
+                  <upload-cover
+                    v-for="(cover, index) in active.cover.type" :key="cover" @cover = "onupload(index, $event)" :cover = "active.cover.images[index]"
+                  />
+                </template>
             </el-form-item>
             <el-form-item label="频道" prop="pindao">
                 <el-select v-model="active.channel_id"  placeholder="请选择频道">
@@ -38,6 +48,7 @@
 <script>
 import { getActivechannels, fabiaoactive, xiugai, huoqu } from '@/api/active'
 import { sctp } from '@/api/image'
+import upload from './component/upload'
 // import { ElementTiptap } from 'element-tiptap'
 import 'element-tiptap/lib/index.css'
 import {
@@ -96,7 +107,8 @@ import {
 export default {
   name: 'publiindex',
   components: {
-    'el-tiptap': ElementTiptap
+    'el-tiptap': ElementTiptap,
+    'upload-cover': upload
   },
   props: {},
   data () {
@@ -171,7 +183,7 @@ export default {
         new SelectAll(),
         new FontType()
       ],
-      rules: {
+      formRules: {
         title: [
           { required: true, message: '请输入标题名称', trigger: 'blur' },
           { min: 5, max: 30, message: '长度在 5 到 30 个字符', trigger: 'blur' }
@@ -246,6 +258,10 @@ export default {
         // console.log(res)
         this.active = res.data.data
       })
+    },
+    onupload (index, url) {
+      // console.log(url)
+      this.active.cover.images[index] = url
     }
   }
 }

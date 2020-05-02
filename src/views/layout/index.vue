@@ -1,6 +1,6 @@
 <template>
      <el-container class="layout-container" >
-  <el-aside class="aside"  width="auto">
+    <el-aside class="aside" width="auto">
       <app-aside  :is-collapse="isCollapse" class="aside-menu"></app-aside>
   </el-aside>
   <el-container>
@@ -33,6 +33,7 @@
 <script>
 import AppAside from './component/aside'
 import { getUserProfile } from '@/api/user'
+import globus from '@/utils/bus'
 export default {
   name: 'index',
   data () {
@@ -46,6 +47,11 @@ export default {
   },
   created () {
     this.getUserProfile()
+    globus.$on('user', (data) => {
+      // console.log('user', data)
+      this.user.name = data.name
+      this.user.photo = data.photo
+    })
   },
   methods: {
     getUserProfile () {
