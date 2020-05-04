@@ -9,7 +9,7 @@
         </div>
         <el-form
         :model="active"
-        :rules="formRules"
+        :rules="forRules"
         label-width="60px"
         ref="publish-form"
         >
@@ -28,11 +28,11 @@
                 </el-radio-group>
                 <template v-if="active.cover.type>0">
                   <upload-cover
-                    v-for="(cover, index) in active.cover.type" :key="cover" @cover = "onupload(index, $event)" :cover = "active.cover.images[index]"
+                    v-for="(cover, index) in active.cover.type" :key="cover" v-model="active.cover.images[index]"
                   />
                 </template>
             </el-form-item>
-            <el-form-item label="频道" prop="pindao">
+            <el-form-item label="频道" prop="channel_id">
                 <el-select v-model="active.channel_id"  placeholder="请选择频道">
                 <el-option v-for="(iteam, index) in Activechannels" :label="iteam.name" :value="iteam.id" :key="index" ></el-option>
                 </el-select>
@@ -183,28 +183,25 @@ export default {
         new SelectAll(),
         new FontType()
       ],
-      formRules: {
+      forRules: {
         title: [
-          { required: true, message: '请输入标题名称', trigger: 'blur' },
-          { min: 5, max: 30, message: '长度在 5 到 30 个字符', trigger: 'blur' }
+          { required: true, message: '请输入文章标题', trigger: 'blur' },
+          { min: 5, max: 30, message: '长度5-30个字符', trigger: 'blur' }
         ],
-        conter: [
+        content: [
           {
             validator (rule, value, callback) {
-              console.log('content validator')
               if (value === '<p></p>') {
-                // 验证失败
                 callback(new Error('请输入文章内容'))
               } else {
-                // 验证通过
                 callback()
               }
             }
           },
-          { required: true, message: '请输入文章内容', trigger: 'blur' }
+          { required: true, message: '请选择文章内容', trigger: 'blur' }
         ],
-        pindao: [
-          { required: true, message: '请选择文章频道' }
+        channel_id: [
+          { required: true, message: '请选择文章频道', trigger: 'blur' }
         ]
       }
     }

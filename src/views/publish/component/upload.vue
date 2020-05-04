@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="cover-wrap" @click="showCoverSelect">
-        <img ref="cover-img" class="cover-img" src="" alt="">
+        <img ref="cover-img" class="cover-img" :src="value" alt="">
     </div>
     <el-dialog
         :modal-append-to-body='false'
@@ -28,7 +28,7 @@ import { sctp } from '@/api/image'
 export default {
   name: 'uoload',
   components: {},
-  props: ['cover'],
+  props: ['value'],
   data () {
     return {
       dialogVisible: false,
@@ -61,10 +61,10 @@ export default {
         const fd = new FormData()
         fd.append('image', file)
         sctp(fd).then(res => {
-        //   console.log(res)
+          // console.log(res)
           this.dialogVisible = false
           this.$refs['cover-img'].src = res.data.data.url
-          this.$emit('cover', res.data.data.url)
+          this.$emit('input', res.data.data.url)
           this.isloding = false
         })
       }
