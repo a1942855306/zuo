@@ -1,5 +1,4 @@
 # toutiao-admin
-123
 
 ## Project setup
 ```
