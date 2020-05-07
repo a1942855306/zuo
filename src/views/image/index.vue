@@ -7,6 +7,7 @@
             <el-breadcrumb-item>素材管理</el-breadcrumb-item>
         </el-breadcrumb>
         </div>
+        <image-g />
         <!-- <div class="sc">
             <el-radio-group size="mini" @change="onCollectChange(1)" v-model="collect">
                 <el-radio-button  label="false">全部</el-radio-button>
@@ -37,7 +38,7 @@
           >
         </el-pagination> -->
     </el-card>
-    <el-dialog
+    <!-- <el-dialog
         title="上传素材"
         :visible.sync="dialogVisible"
         :modal-append-to-body="false"
@@ -56,18 +57,21 @@
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
             <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
-    </el-dialog>
+    </el-dialog> -->
 </div>
 </template>
 <script>
 // import { hqtp, putsctp, deleteImage } from '@/api/image'
-// import image from './comment/image'
+import image from './comment/image'
 
 export default {
   name: 'imagess',
-  components: {},
+  components: {
+    'image-g': image
+  },
   props: {},
   data () {
+    return {}
     // const user = JSON.parse(window.localStorage.getItem('user'))
     // return {
     //   collect: false,

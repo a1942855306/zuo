@@ -6,11 +6,13 @@
     <el-dialog
         :modal-append-to-body='false'
         title="选择封面"
-        width="30%"
+        width="50%"
         :visible.sync="dialogVisible"
         >
-        <el-tabs model="second" type="card">
-            <el-tab-pane label="素材库" name="first">素材库</el-tab-pane>
+        <el-tabs v-model="activeName" type="card">
+            <el-tab-pane label="素材库" name="first">
+              <image-a :isShowadd = "false" :isShowactive = "false" is-show-selected ref="imagelist" />
+            </el-tab-pane>
             <el-tab-pane label="上传图片" name="second">
                 <input ref="file" type="file" @change="onphoto"><br>
                 <img ref="preview-imag" src="" alt="">
@@ -25,9 +27,12 @@
 </template>
 <script>
 import { sctp } from '@/api/image'
+import image from '@/views/image/comment/image'
 export default {
   name: 'uoload',
-  components: {},
+  components: {
+    'image-a': image
+  },
   props: ['value'],
   data () {
     return {
@@ -52,6 +57,7 @@ export default {
     },
     oncover () {
       this.isloding = true
+      console.log(this.activeName)
       if (this.activeName === 'second') {
         const file = this.$refs.file.files[0]
         if (!file) {
@@ -67,6 +73,17 @@ export default {
           this.$emit('input', res.data.data.url)
           this.isloding = false
         })
+      } else if (this.activeName === 'first') {
+        const imagelist = this.$refs.imagelist
+        const select = imagelist.select
+        this.isloding = false
+        if (select === null) {
+          this.$message('请选择文件')
+          return false
+        }
+        this.dialogVisible = false
+        console.log(imagelist.images[select])
+        this.$emit('input', imagelist.images[select].url)
       }
     }
   }
