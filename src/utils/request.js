@@ -1,5 +1,6 @@
 import axios from 'axios'
 import JSONbig from 'json-bigint'
+import router from '@/router/'
 const request = axios.create({
   baseURL: 'http://ttapi.research.itcast.cn/',
   transformResponse: [function (data) {
@@ -22,4 +23,13 @@ request.interceptors.request.use(
     console.log(error)
   }
 )
+request.interceptors.response.use(function (response) {
+  return response
+}, function (error) {
+  if (error.response && error.response.status === 401) {
+    window.localStorage.removeItem('user')
+    router.push('/')
+  }
+  return Promise.reject(error)
+})
 export default request
