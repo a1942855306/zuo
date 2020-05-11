@@ -2,7 +2,7 @@
      <el-container class="layout-container" >
     <el-aside class="aside" width="auto">
       <app-aside  :is-collapse="isCollapse" class="aside-menu"></app-aside>
-  </el-aside>
+    </el-aside>
   <el-container>
     <el-header class="header">
         <div class="header-container">
