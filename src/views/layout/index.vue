@@ -8,7 +8,7 @@
         <div class="header-container">
     <div>
         <i class="el-icon-s-fold" @click="isCollapse=!isCollapse"> </i>
-        江苏传智播客有限公司
+        后台管理系统
     </div>
     <el-dropdown>
         <div class="avatar-wrap">
