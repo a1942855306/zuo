@@ -8,7 +8,7 @@
         <div class="header-container">
     <div>
         <i class="el-icon-s-fold" @click="isCollapse=!isCollapse"> </i>
-        王鑫彤 后台管理项目
+        王鑫彤后台管理项目
     </div>
     <el-dropdown>
         <div class="avatar-wrap">
