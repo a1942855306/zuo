@@ -1,5 +1,5 @@
 # toutiao-admin
-xxx
+xx
 ## Project setup
 ```
 npm install
