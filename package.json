@@ -15,7 +15,7 @@
     "element-tiptap": "^1.19.0",
     "element-ui": "^2.13.1",
     "es6-promise": "^4.2.8",
-    "json-bigint": "^0.3.0",
+    "json-bigint": "^1.0.0",
     "prosemirror-utils": "^0.9.6",
     "tiptap-vuetify": "^2.13.2",
     "vue": "^2.6.11",
